@@ -1,0 +1,44 @@
+(If you are running in microstack, use microstack.openstack)
+1. openstack project list
+
+2. openstack project create --description 'my new project' new-project --domain default
+
+3. openstack project set PROJECT_ID --disable
+
+4. openstack project set PROJECT_ID --enable
+
+5. openstack project set PROJECT_ID --name project-new
+
+6. openstack project show PROJECT_ID
+
+7. openstack project delete PROJECT_ID
+
+8. openstack user list
+
+9. openstack user create --project new-project --password PASSWORD new-user
+
+10. openstack user set USER_NAME --disable
+
+11. openstack user set USER_NAME --enable
+
+12. openstack user set USER_NAME --name user-new --email new-user@example.com
+
+13. openstack user delete USER_NAME
+
+14. openstack role list
+
+15. openstack role create new-role
+
+16. openstack user list
+17. openstack project list
+18. openstack role list
+
+20. openstack role add --user USER_NAME --project TENANT_ID ROLE_NAME
+
+21. openstack role assignment list --user USER_NAME --project PROJECT_ID --names
+
+22. openstack role show ROLE_NAME
+
+23. openstack role remove --user USER_NAME --project TENANT_ID ROLE_NAME
+
+24. openstack role list --user USER_NAME --project TENANT_ID
