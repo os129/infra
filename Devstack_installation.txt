@@ -1,0 +1,54 @@
+1. su -
+2. usermod -aG sudo ubuntu
+3. visudo
+
+4.
+ubuntu ALL=(ALL)NOPASSWD:ALL
+stack ALL=(ALL)NOPASSWD:ALL
+
+5. sudo apt install mysql-client-core-8.0
+6. sudo apt update && sudo apt upgrade -y
+7. sudo apt install -y git
+8. sudo adduser stack
+9. sudo usermod -aG sudo stack
+10. su - stack
+11. git clone https://opendev.org/openstack/devstack.git
+12. cd devstack/
+13. nano local.conf
+
+14.
+[[local|localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+GLANCE_HOSTPORT=127.0.0.1:9292
+enable_service cinder cinderv2 cinderv3
+enable_service n-api n-cpu n-cond n-sch n-novnc n-api-meta
+enable_service glance
+enable_service swift
+enable_service horizon
+HOST_IP=<your_ip_address>   (<your_ip_address> = terminal - ip addr show (inet<ip_addresss>))
+
+15. ./stack.sh (It will take long time)
+16. http://<your_ip_address>/dashboard
+
+17.
+Username: admin
+Password: secret
+
+18. source ~/devstack/openrc admin admin
+19. env | grep OS_
+20. openstack service list
+
+#Cinder
+1. openstack volume create --size 1 my_volume
+2. openstack volume list
+
+#Swift
+1. Go to the Dashboard
+2. Left side navbar have project -- object storage -- container -- object
+
+#Key pair, Security group, ssh validation
+1. In project -- keypair, Networks -- security group, instance -- launch instance -- conf(keypair, security group).
+2. (optional) Terminal ssh -i "path to the private file" <username>@<Host_ip>
