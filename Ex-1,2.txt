@@ -1,0 +1,18 @@
+1. su
+2. sudo apt update && sudo apt upgrade -y
+3. sudo snap install --beta microstack
+4. microstack init --auto --control
+5. snap get microstack config.credentials.keystone-password
+<password>
+
+6. 
+username: admin
+password: <password>
+
+#Nova config
+1. microstack launch cirros -n MyVm
+
+#Customized cloud image
+1. install cloud os image -- create image using dashbord (Name:NetBSD, description:cloud image, type:QEMU-Emulator, minimum disk(GB):4, Visibility:public)
+
+2. Terminal - microstack launch NetBSD -n Hunter --flavor m1.small 
