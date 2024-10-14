@@ -1,0 +1,41 @@
+su -
+usermod -aG sudo ubuntu
+visudo
+
+ubuntu ALL=(ALL)NOPASSWD:ALL
+stack ALL=(ALL)NOPASSWD:ALL
+
+sudo apt install mysql-client-core-8.0
+sudo apt update && sudo apt upgrade -y
+
+apt install -y git
+sudo adduser stack
+sudo usermod -aG sudo stack
+su - stack
+git clone https://opendev.org/openstack/devstack.git
+cd devstack/
+nano local.conf
+
+[[local|localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+GLANCE_HOSTPORT=12.0.0.1:9292
+enable_service cinder cinderv2 cinderv3
+enable_service n-api n-cpu n-cond n-sch n-novnc n-api-meta
+enable_service glance
+enable_service swift
+enable_service horizon
+HOST_IP=10.0.2.15
+
+./stack.sh (It will take long time)
+http://10.0.2.15/dashboard
+username: admin --> password: secret
+source ~/devstack/openrc admin admin
+env | grep OS_
+openstack service list
+openstack volume create --size 1 my_volume
+openstack volume list
+./unstack.sh
+./clean.sh 
