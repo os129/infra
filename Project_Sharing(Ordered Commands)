@@ -1,0 +1,33 @@
+microstack.openstack project list
+
+microstack.openstack project create --description "My_Project" <Project Name> --domain default
+
+microstack.openstack project list
+
+microstack.openstack user list
+
+microstack.openstack user create --project new_project --password PASSWORD <UserName>
+
+microstack.openstack user list
+
+microstack.openstack user set <UserName> --enable
+
+microstack.openstack role list
+
+microstack.openstack role create <RoleName>
+
+microstack.openstack role list
+
+microstack.openstack role add --user <UserName> --project <Project Name> <RoleName>
+
+microstack.openstack role show <RoleName>
+
+microstack.openstack user list
+
+microstack.openstack role add --user <UserName> --project <project_name/project_id> <RoleName>
+
+microstack.openstack role show <RoleName>
+
+microstack.openstack role assignment list --user <UserName> --project <project_name/project_id> --names
+
+microstack.openstack role remove --user <UserName> --project <project_name/project_id> <RoleName>
